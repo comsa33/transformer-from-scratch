@@ -1,5 +1,8 @@
 # Transformer 모델 구현 프로젝트
 
+## 📊 프로젝트 분석 리포트
+본 프로젝트의 모든 구현 결과와 논문 재현 검증 내용을 담은 **[최종 분석 리포트](FINAL_REPORT.md)** 를 확인하세요. 리포트에는 30개 이상의 시각화 결과와 함께 각 구성 요소의 상세한 분석이 포함되어 있습니다.
+
 ## 개요
 이 프로젝트는 Transformer 아키텍처를 처음부터 구현하며 각 구성 요소를 깊이 이해하는 것을 목표로 합니다. Python 3.11과 uv 패키지 매니저를 사용합니다.
 
@@ -7,7 +10,7 @@
 
 ### 1. 전체 구조 개요
 
-Transformer는 2017년 "Attention is All You Need" 논문에서 처음 소개된 모델로, RNN이나 CNN 없이 오직 Attention 메커니즘만으로 구성된 혁신적인 아키텍처입니다.
+Transformer는 2017년 ["Attention is All You Need"](https://arxiv.org/abs/1706.03762) 논문에서 처음 소개된 모델로, RNN이나 CNN 없이 오직 Attention 메커니즘만으로 구성된 혁신적인 아키텍처입니다.
 
 ```
 입력 시퀀스 → Encoder → Context Vectors → Decoder → 출력 시퀀스
@@ -214,5 +217,5 @@ uv run python tests/test_transformer.py
 ```
 
 ## 참고 문헌
-- Vaswani et al., "Attention Is All You Need", 2017
-- The Annotated Transformer (Harvard NLP)
+- Vaswani et al., ["Attention Is All You Need"](https://arxiv.org/abs/1706.03762), 2017
+- [The Annotated Transformer](http://nlp.seas.harvard.edu/2018/04/03/attention.html) (Harvard NLP)

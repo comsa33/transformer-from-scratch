@@ -2,7 +2,7 @@
 
 ## 프로젝트 개요
 
-본 프로젝트는 "Attention Is All You Need" 논문의 Transformer 아키텍처를 PyTorch로 처음부터 구현한 교육용 프로젝트입니다. 모든 구성 요소를 단계별로 구현하고, 각 모듈에 대한 상세한 테스트와 시각화를 통해 논문의 내용을 검증했습니다.
+본 프로젝트는 ["Attention Is All You Need"](https://arxiv.org/abs/1706.03762) 논문의 Transformer 아키텍처를 PyTorch로 처음부터 구현한 교육용 프로젝트입니다. 모든 구성 요소를 단계별로 구현하고, 각 모듈에 대한 상세한 테스트와 시각화를 통해 논문의 내용을 검증했습니다.
 
 ## 목차
 
