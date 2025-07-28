@@ -10,17 +10,18 @@ model:
   d_ff: 2048
   dropout: 0.1
   activation: "gelu"  # 최신 연구에서 더 좋은 성능 (원논문: relu)
-  max_sequence_length: 256  # 메모리 절약을 위해 축소 (원본: 제한없음)
+  use_bias: true  # Linear 레이어에 bias 사용 (기본값)
+  max_sequence_length: 512  # 메모리 절약을 위해 축소 (원본: 제한없음)
   vocab_size: 32000  # BPE 토큰 수
 
 training:
   # 배치 설정 - RTX 3090 메모리에 맞춤
-  batch_size: 12  # 토큰 수가 아닌 문장 수 (원본: ~25000 토큰)
-  gradient_accumulation_steps: 20  # 효과적인 배치 크기: 12 * 20 = 240
+  batch_size: 32  # 토큰 수가 아닌 문장 수 (원본: ~25000 토큰)
+  gradient_accumulation_steps: 20  # 효과적인 배치 크기: 32 * 20 = 640
 
   # 옵티마이저 설정
   optimizer: "adam"
-  learning_rate: 0.0007  # 작은 배치에 맞게 조정
+  learning_rate: 0.00005
   betas: [0.9, 0.98]
   eps: 0.000000001  # 1e-9
 
