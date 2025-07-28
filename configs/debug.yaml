@@ -1,0 +1,57 @@
+# Debug Transformer 설정
+# 디버깅과 빠른 반복을 위한 최소 설정
+
+model:
+  d_model: 128
+  num_heads: 2
+  num_encoder_layers: 2
+  num_decoder_layers: 2
+  d_ff: 512
+  max_seq_length: 64
+  dropout_rate: 0.0  # 디버깅을 위해 dropout 비활성화
+  attention_dropout_rate: 0.0
+  activation: "relu"
+  layer_norm_eps: 1e-6
+  initializer_range: 0.02
+  use_bias: true
+  share_embeddings: false
+
+training:
+  batch_size: 8
+  learning_rate: 0.001
+  warmup_steps: 100
+  max_steps: 1000
+  gradient_clip_val: 1.0
+  label_smoothing: 0.0  # 디버깅을 위해 비활성화
+  
+optimizer:
+  type: "adam"
+  betas: [0.9, 0.999]
+  eps: 1e-8
+  weight_decay: 0.0
+
+scheduler:
+  type: "constant"  # 일정한 learning rate
+
+data:
+  max_length: 64
+  num_workers: 0  # 디버깅을 위해 메인 프로세스에서 실행
+  pin_memory: false
+  
+logging:
+  log_interval: 10
+  eval_interval: 50
+  save_interval: 100
+  verbose: true  # 자세한 로깅
+  
+checkpoint:
+  save_dir: "checkpoints_debug"
+  save_total_limit: 1
+  save_best: false
+
+# 디버그 옵션
+debug:
+  print_model: true
+  print_batch_shapes: true
+  check_gradients: true
+  profile: false

@@ -197,8 +197,29 @@ test-modeling/
 
 ### 의존성 설치
 ```bash
-# 필요한 패키지 설치
-uv add torch numpy
+# 필요한 패키지 설치 (uv 사용)
+uv sync
+```
+
+### Configuration 시스템
+
+프로젝트는 YAML 기반의 설정 시스템을 사용합니다. `configs/` 디렉토리에서 사전 정의된 설정을 확인할 수 있습니다:
+
+- `base.yaml`: 논문 기준 표준 설정 (d_model=512, 6 layers)
+- `small.yaml`: 빠른 실험용 작은 모델 (d_model=256, 3 layers)
+- `large.yaml`: 고성능 대규모 모델 (d_model=1024, 12 layers)
+- `debug.yaml`: 디버깅용 최소 설정 (d_model=128, 2 layers)
+
+### 학습 실행
+```bash
+# 기본 설정으로 학습
+uv run python scripts/train_with_config.py
+
+# 특정 설정 파일 사용
+uv run python scripts/train_with_config.py --config small
+
+# 설정 파일 + 명령줄 옵션
+uv run python scripts/train_with_config.py --config base --batch-size 64 --learning-rate 0.0005
 ```
 
 ### 테스트 실행

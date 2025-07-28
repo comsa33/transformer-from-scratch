@@ -7,9 +7,10 @@ Encoder와 Decoder를 결합한 전체 Transformer 모델입니다.
 
 import torch
 import torch.nn as nn
-from typing import Optional, Dict, Tuple
+from typing import Optional, Dict, Tuple, Union
 import math
 
+from ..config import TransformerConfig
 from .encoder import TransformerEncoder, create_encoder
 from .decoder import TransformerDecoder, create_decoder
 from ..utils.masking import create_padding_mask
@@ -39,21 +40,53 @@ class Transformer(nn.Module):
     
     def __init__(
         self,
-        num_encoder_layers: int = 6,
-        num_decoder_layers: int = 6,
-        d_model: int = 512,
-        num_heads: int = 8,
-        d_ff: int = 2048,
-        src_vocab_size: int = 30000,
-        tgt_vocab_size: int = 30000,
-        max_length: int = 512,
-        dropout: float = 0.1,
-        activation: str = 'relu',
-        norm_first: bool = True,
-        share_embeddings: bool = False,
-        share_encoder_decoder_embeddings: bool = False
+        config: Union[TransformerConfig, None] = None,
+        num_encoder_layers: Optional[int] = None,
+        num_decoder_layers: Optional[int] = None,
+        d_model: Optional[int] = None,
+        num_heads: Optional[int] = None,
+        d_ff: Optional[int] = None,
+        src_vocab_size: Optional[int] = None,
+        tgt_vocab_size: Optional[int] = None,
+        max_length: Optional[int] = None,
+        dropout: Optional[float] = None,
+        activation: Optional[str] = None,
+        norm_first: Optional[bool] = None,
+        share_embeddings: Optional[bool] = None,
+        share_encoder_decoder_embeddings: Optional[bool] = None
     ):
         super().__init__()
+        
+        # Config가 제공된 경우 값 추출
+        if config is not None:
+            num_encoder_layers = config.num_encoder_layers
+            num_decoder_layers = config.num_decoder_layers
+            d_model = config.d_model
+            num_heads = config.num_heads
+            d_ff = config.d_ff
+            src_vocab_size = config.vocab_size
+            tgt_vocab_size = config.vocab_size
+            max_length = config.max_seq_length
+            dropout = config.dropout_rate
+            activation = config.activation
+            norm_first = True  # 기본값
+            share_embeddings = config.share_embeddings
+            share_encoder_decoder_embeddings = config.share_embeddings
+        else:
+            # 기본값 설정
+            num_encoder_layers = num_encoder_layers or 6
+            num_decoder_layers = num_decoder_layers or 6
+            d_model = d_model or 512
+            num_heads = num_heads or 8
+            d_ff = d_ff or 2048
+            src_vocab_size = src_vocab_size or 30000
+            tgt_vocab_size = tgt_vocab_size or 30000
+            max_length = max_length or 512
+            dropout = dropout or 0.1
+            activation = activation or 'relu'
+            norm_first = norm_first if norm_first is not None else True
+            share_embeddings = share_embeddings or False
+            share_encoder_decoder_embeddings = share_encoder_decoder_embeddings or False
         
         # Encoder
         self.encoder = TransformerEncoder(

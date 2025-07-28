@@ -1,0 +1,51 @@
+# Small Transformer 설정
+# 빠른 실험과 테스트용 작은 모델
+
+model:
+  d_model: 256
+  num_heads: 4
+  num_encoder_layers: 3
+  num_decoder_layers: 3
+  d_ff: 1024
+  max_seq_length: 128
+  dropout_rate: 0.1
+  attention_dropout_rate: 0.1
+  activation: "relu"
+  layer_norm_eps: 1e-6
+  initializer_range: 0.02
+  use_bias: true
+  share_embeddings: false
+
+training:
+  batch_size: 64
+  learning_rate: 0.0005
+  warmup_steps: 1000
+  max_steps: 10000
+  gradient_clip_val: 1.0
+  label_smoothing: 0.1
+  
+optimizer:
+  type: "adam"
+  betas: [0.9, 0.98]
+  eps: 1e-9
+  weight_decay: 0.0
+
+scheduler:
+  type: "cosine"
+  warmup_steps: 1000
+  min_lr: 1e-6
+
+data:
+  max_length: 128
+  num_workers: 2
+  pin_memory: true
+  
+logging:
+  log_interval: 50
+  eval_interval: 500
+  save_interval: 1000
+  
+checkpoint:
+  save_dir: "checkpoints_small"
+  save_total_limit: 3
+  save_best: true

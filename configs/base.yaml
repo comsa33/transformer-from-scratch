@@ -1,0 +1,51 @@
+# Base Transformer 설정
+# 논문 "Attention Is All You Need"의 기본 설정
+
+model:
+  d_model: 512
+  num_heads: 8
+  num_encoder_layers: 6
+  num_decoder_layers: 6
+  d_ff: 2048
+  max_seq_length: 512
+  dropout_rate: 0.1
+  attention_dropout_rate: 0.1
+  activation: "relu"
+  layer_norm_eps: 1e-6
+  initializer_range: 0.02
+  use_bias: true
+  share_embeddings: false
+
+training:
+  batch_size: 32
+  learning_rate: 0.0001
+  warmup_steps: 4000
+  max_steps: 100000
+  gradient_clip_val: 1.0
+  label_smoothing: 0.1
+  
+optimizer:
+  type: "adam"
+  betas: [0.9, 0.98]
+  eps: 1e-9
+  weight_decay: 0.0
+
+scheduler:
+  type: "transformer"  # 논문의 learning rate schedule
+  warmup_steps: 4000
+  d_model: 512
+
+data:
+  max_length: 512
+  num_workers: 4
+  pin_memory: true
+  
+logging:
+  log_interval: 100
+  eval_interval: 1000
+  save_interval: 5000
+  
+checkpoint:
+  save_dir: "checkpoints"
+  save_total_limit: 5
+  save_best: true

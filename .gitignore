@@ -48,3 +48,6 @@ htmlcov/
 dist/
 build/
 *.egg-info/
+
+# Documentation
+IMPLEMENTATION_ORDER.md

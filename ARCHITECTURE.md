@@ -38,14 +38,12 @@ test-modeling/
 │   └── utils/                 # 유틸리티 함수
 │       ├── __init__.py
 │       ├── masking.py         # 마스킹 유틸리티
-│       ├── initialization.py  # 가중치 초기화
-│       └── metrics.py         # 평가 메트릭
+│       └── initialization.py  # 가중치 초기화
 │
 ├── data/                      # 데이터 처리
 │   ├── __init__.py
 │   ├── dataset.py             # 데이터셋 클래스
-│   ├── tokenizer.py           # 토크나이저 구현
-│   └── preprocessing.py       # 전처리 유틸리티
+│   └── tokenizer.py           # 토크나이저 구현
 │
 ├── training/                  # 학습 관련 코드
 │   ├── __init__.py
@@ -53,26 +51,35 @@ test-modeling/
 │   ├── optimizer.py           # 옵티마이저 및 스케줄러
 │   └── loss.py                # 손실 함수 정의
 │
+├── evaluation/                # 평가 관련 코드
+│   ├── __init__.py
+│   └── metrics.py             # 평가 메트릭 구현
+│
 ├── scripts/                   # 실행 스크립트
-│   ├── train.py              # 모델 학습 스크립트
-│   ├── evaluate.py           # 모델 평가 스크립트
-│   └── inference.py          # 추론 스크립트
+│   └── train_with_config.py  # 설정 기반 학습 스크립트
 │
 ├── tests/                     # 테스트 코드
 │   ├── __init__.py
 │   ├── test_attention.py      # Attention 레이어 테스트
 │   ├── test_encoder.py        # Encoder 테스트
 │   ├── test_decoder.py        # Decoder 테스트
-│   └── test_transformer.py    # 전체 모델 테스트
+│   ├── test_transformer.py    # 전체 모델 테스트
+│   └── ... (기타 모듈별 테스트)
 │
 ├── notebooks/                 # 실험 및 시각화 노트북
-│   ├── attention_visualization.ipynb
-│   └── training_analysis.ipynb
+│   └── (추후 추가 예정)
 │
-└── configs/                   # 설정 파일
-    ├── base_config.yaml       # 기본 설정
-    ├── small_config.yaml      # 작은 모델 설정
-    └── large_config.yaml      # 큰 모델 설정
+├── outputs/                   # 테스트 결과 및 시각화
+│   └── *.png                  # 생성된 시각화 이미지들
+│
+├── configs/                   # 설정 시스템
+│   ├── __init__.py           # 설정 모듈 초기화
+│   ├── utils.py              # 설정 로드/저장 유틸리티
+│   ├── README.md             # 설정 시스템 문서
+│   ├── base.yaml             # 논문 기준 표준 설정
+│   ├── small.yaml            # 빠른 실험용 작은 모델
+│   ├── large.yaml            # 고성능 대규모 모델
+│   └── debug.yaml            # 디버깅용 최소 설정
 ```
 
 ## 모듈별 상세 설계
