@@ -23,7 +23,7 @@ training:
   max_steps: 10000
   gradient_clip_val: 1.0
   label_smoothing: 0.1
-  
+
 optimizer:
   type: "adam"
   betas: [0.9, 0.98]
@@ -39,12 +39,12 @@ data:
   max_length: 128
   num_workers: 2
   pin_memory: true
-  
+
 logging:
   log_interval: 50
   eval_interval: 500
   save_interval: 1000
-  
+
 checkpoint:
   save_dir: "checkpoints_small"
   save_total_limit: 3

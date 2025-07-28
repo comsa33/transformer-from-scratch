@@ -12,3 +12,108 @@ dependencies = [
     "torch>=2.7.1",
     "tqdm>=4.67.1",
 ]
+
+[dependency-groups]
+dev = [
+    "black>=25.1.0",
+    "mypy>=1.17.0",
+    "pre-commit>=4.2.0",
+    "pre-commit-uv>=4.1.4",
+    "ruff>=0.12.5",
+]
+
+[tool.black]
+line-length = 100
+target-version = ['py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # 디렉토리
+  \.git
+  | \.mypy_cache
+  | \.pytest_cache
+  | \.ruff_cache
+  | __pycache__
+  | outputs
+  | data/raw
+)/
+'''
+
+[tool.ruff]
+# Python 3.11을 대상으로 함
+target-version = "py311"
+line-length = 100
+
+# lint 섹션으로 이동 (새로운 ruff 버전에 맞춤)
+[tool.ruff.lint]
+# 활성화할 규칙 선택
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "B",    # flake8-bugbear
+    "C4",   # flake8-comprehensions
+    "UP",   # pyupgrade
+    "ARG",  # flake8-unused-arguments
+    "SIM",  # flake8-simplify
+]
+
+# 무시할 규칙
+ignore = [
+    "E501",  # line too long (black이 처리)
+    "B008",  # do not perform function calls in argument defaults
+    "B905",  # zip without an explicit strict= parameter
+    "B904",  # raise without from inside except (too strict)
+    "SIM108",  # ternary operator (sometimes less readable)
+    "SIM115",  # context manager for file open (test files)
+    "B006",  # mutable default argument (used intentionally)
+    "B007",  # unused loop variable (acceptable in some cases)
+    "B028",  # stacklevel in warnings (not critical)
+    "SIM102",  # nested if statements (sometimes clearer)
+    "SIM103",  # return condition directly (sometimes less clear)
+    "F841",  # local variable assigned but never used (in tests)
+    "ARG001",  # unused function argument
+    "ARG002",  # unused method argument
+    "B023",  # function definition does not bind loop variable
+    "C408",  # unnecessary dict call
+    "UP038",  # use X | Y (sometimes less readable)
+]
+
+# 제외할 파일/디렉토리
+exclude = [
+    ".git",
+    "__pycache__",
+    "outputs",
+    "data",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+]
+
+[tool.ruff.lint.per-file-ignores]
+# 테스트 파일에서는 assert 사용 허용, import 순서 무시
+"tests/*" = ["S101", "E402"]
+# __init__.py 파일에서는 unused import 허용
+"__init__.py" = ["F401"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["transformer", "data", "training", "evaluation"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+
+# 특정 모듈 제외
+[[tool.mypy.overrides]]
+module = [
+    "tests.*",
+    "scripts.*",
+]
+ignore_errors = true

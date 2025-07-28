@@ -24,7 +24,7 @@ training:
   gradient_clip_val: 1.0
   label_smoothing: 0.1
   gradient_accumulation_steps: 4  # 효과적인 배치 크기 = 16 * 4 = 64
-  
+
 optimizer:
   type: "adamw"
   betas: [0.9, 0.98]
@@ -41,17 +41,17 @@ data:
   num_workers: 8
   pin_memory: true
   prefetch_factor: 2
-  
+
 logging:
   log_interval: 100
   eval_interval: 2000
   save_interval: 10000
-  
+
 checkpoint:
   save_dir: "checkpoints_large"
   save_total_limit: 10
   save_best: true
-  
+
 # 추가 학습 기법
 training_techniques:
   mixed_precision: true  # FP16 학습

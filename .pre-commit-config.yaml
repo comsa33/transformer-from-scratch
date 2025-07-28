@@ -1,0 +1,76 @@
+# pre-commit 설정 파일
+# https://pre-commit.com
+
+default_language_version:
+  python: python3.11
+
+repos:
+  # uv 관련 hooks
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.8.3
+    hooks:
+      # uv.lock 파일을 최신 상태로 유지
+      - id: uv-lock
+      # requirements.txt 내보내기 (선택사항)
+      # - id: uv-export
+      #   args: ["--format", "requirements-txt", "--no-hashes", "-o", "requirements.txt"]
+
+  # Python 코드 포맷터 - Black
+  - repo: https://github.com/psf/black
+    rev: 25.1.0
+    hooks:
+      - id: black
+        language_version: python3.11
+        args: ["--line-length=100"]
+
+  # Python linter - Ruff (매우 빠른 linter)
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.12.5
+    hooks:
+      # Ruff linter
+      - id: ruff
+        args: ["--fix", "--exit-non-zero-on-fix"]
+      # Ruff formatter (Black 호환) - 비활성화 (black과 충돌)
+      # - id: ruff-format
+
+  # 타입 체크 - mypy (일시적으로 비활성화)
+  # - repo: https://github.com/pre-commit/mirrors-mypy
+  #   rev: v1.17.0
+  #   hooks:
+  #     - id: mypy
+  #       additional_dependencies: [types-PyYAML]
+  #       args: ["--ignore-missing-imports", "--follow-imports=silent"]
+  #       exclude: ^(tests/|scripts/)
+
+  # 일반적인 pre-commit hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+        args: ["--maxkb=1000"]
+      - id: check-merge-conflict
+      - id: check-toml
+      - id: debug-statements
+      - id: mixed-line-ending
+        args: ["--fix=lf"]
+
+  # Jupyter 노트북 정리 (있을 경우)
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.8.1
+    hooks:
+      - id: nbstripout
+        files: \.ipynb$
+
+# 로컬 hooks
+  - repo: local
+    hooks:
+      # pyproject.toml 변경시 uv sync 실행
+      - id: uv-sync
+        name: UV Sync Dependencies
+        entry: uv sync
+        language: system
+        files: pyproject.toml
+        pass_filenames: false

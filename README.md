@@ -97,8 +97,8 @@ Encoder는 N개의 동일한 층으로 구성됩니다 (일반적으로 N=6).
 
 **Encoder 전체 구조:**
 ```
-Input Embedding → Positional Encoding → 
-[Encoder Layer 1] → [Encoder Layer 2] → ... → [Encoder Layer N] → 
+Input Embedding → Positional Encoding →
+[Encoder Layer 1] → [Encoder Layer 2] → ... → [Encoder Layer N] →
 Encoder Output
 ```
 
@@ -121,8 +121,8 @@ Decoder도 N개의 동일한 층으로 구성됩니다.
 
 **Decoder 전체 구조:**
 ```
-Output Embedding → Positional Encoding → 
-[Decoder Layer 1] → [Decoder Layer 2] → ... → [Decoder Layer N] → 
+Output Embedding → Positional Encoding →
+[Decoder Layer 1] → [Decoder Layer 2] → ... → [Decoder Layer N] →
 Linear → Softmax → Output Probabilities
 ```
 
@@ -199,6 +199,23 @@ test-modeling/
 ```bash
 # 필요한 패키지 설치 (uv 사용)
 uv sync
+
+# 개발 환경 설정 (pre-commit 설치)
+uv run pre-commit install
+```
+
+### 코드 품질 관리
+
+이 프로젝트는 pre-commit hooks를 사용하여 코드 품질을 관리합니다:
+
+- **Black**: 코드 포맷팅 (line-length: 100)
+- **Ruff**: 빠른 Python linter
+- **MyPy**: 정적 타입 검사
+- **uv-lock**: 의존성 동기화
+
+커밋 전 모든 파일 검사:
+```bash
+uv run pre-commit run --all-files
 ```
 
 ### Configuration 시스템

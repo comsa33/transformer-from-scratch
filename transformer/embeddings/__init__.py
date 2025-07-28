@@ -3,7 +3,7 @@
 """
 
 from .positional import PositionalEncoding
-from .token_embedding import TokenEmbedding, PositionalTokenEmbedding
+from .token_embedding import PositionalTokenEmbedding, TokenEmbedding
 
 __all__ = [
     "TokenEmbedding",

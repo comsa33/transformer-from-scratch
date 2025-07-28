@@ -292,7 +292,7 @@
    - Layer Normalization
    - Feed-Forward Networks
 
-2. **검증된 결과**: 
+2. **검증된 결과**:
    - 각 모듈의 동작이 논문의 설명과 일치
    - Attention 패턴이 의미 있는 정보를 포착
    - Gradient flow가 안정적으로 유지됨
@@ -317,6 +317,6 @@
 
 ---
 
-**작성일**: 2025년 7월 28일  
-**저자**: ruo lee  
+**작성일**: 2025년 7월 28일
+**저자**: ruo lee
 **프로젝트**: transformer-from-scratch

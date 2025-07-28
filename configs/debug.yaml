@@ -23,7 +23,7 @@ training:
   max_steps: 1000
   gradient_clip_val: 1.0
   label_smoothing: 0.0  # 디버깅을 위해 비활성화
-  
+
 optimizer:
   type: "adam"
   betas: [0.9, 0.999]
@@ -37,13 +37,13 @@ data:
   max_length: 64
   num_workers: 0  # 디버깅을 위해 메인 프로세스에서 실행
   pin_memory: false
-  
+
 logging:
   log_interval: 10
   eval_interval: 50
   save_interval: 100
   verbose: true  # 자세한 로깅
-  
+
 checkpoint:
   save_dir: "checkpoints_debug"
   save_total_limit: 1

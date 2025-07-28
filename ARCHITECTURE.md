@@ -90,7 +90,7 @@ test-modeling/
 ```python
 class MultiHeadAttention:
     """Multi-Head Attention 메커니즘 구현
-    
+
     주요 메서드:
     - forward(): 어텐션 계산
     - _scaled_dot_product_attention(): 스케일드 닷 프로덕트 어텐션
@@ -103,7 +103,7 @@ class MultiHeadAttention:
 ```python
 class PositionwiseFeedForward:
     """Position-wise Feed-Forward Network
-    
+
     구성:
     - 두 개의 Linear 레이어
     - ReLU 활성화 함수
@@ -115,7 +115,7 @@ class PositionwiseFeedForward:
 ```python
 class LayerNormalization:
     """Layer Normalization 구현
-    
+
     특징:
     - 학습 가능한 scale과 shift 파라미터
     - 수치 안정성을 위한 epsilon
@@ -128,7 +128,7 @@ class LayerNormalization:
 ```python
 class TokenEmbedding:
     """토큰을 벡터로 변환
-    
+
     파라미터:
     - vocab_size: 어휘 크기
     - d_model: 임베딩 차원
@@ -139,7 +139,7 @@ class TokenEmbedding:
 ```python
 class PositionalEncoding:
     """위치 정보 인코딩
-    
+
     구현 방식:
     - Sinusoidal 인코딩
     - 학습 가능한 인코딩 (선택적)
@@ -152,7 +152,7 @@ class PositionalEncoding:
 ```python
 class EncoderLayer:
     """단일 Encoder 레이어
-    
+
     구성:
     - Multi-Head Self-Attention
     - Position-wise FFN
@@ -162,7 +162,7 @@ class EncoderLayer:
 
 class TransformerEncoder:
     """전체 Encoder 스택
-    
+
     구성:
     - N개의 EncoderLayer
     - 입력 임베딩 처리
@@ -173,7 +173,7 @@ class TransformerEncoder:
 ```python
 class DecoderLayer:
     """단일 Decoder 레이어
-    
+
     구성:
     - Masked Multi-Head Self-Attention
     - Multi-Head Cross-Attention
@@ -184,7 +184,7 @@ class DecoderLayer:
 
 class TransformerDecoder:
     """전체 Decoder 스택
-    
+
     구성:
     - N개의 DecoderLayer
     - 출력 임베딩 처리
@@ -197,7 +197,7 @@ class TransformerDecoder:
 @dataclass
 class TransformerConfig:
     """Transformer 설정 클래스
-    
+
     주요 파라미터:
     - d_model: 모델 차원 (512)
     - num_heads: 어텐션 헤드 수 (8)
@@ -265,7 +265,7 @@ encoder_output = encoder(src_tokens, src_mask)
 
 ### 1. 변형 모델 지원
 - BERT-style (Encoder-only)
-- GPT-style (Decoder-only)  
+- GPT-style (Decoder-only)
 - T5-style (Encoder-Decoder)
 
 ### 2. 추가 기능
