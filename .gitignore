@@ -36,8 +36,13 @@ data/wmt14_debug/
 data/raw/
 data/processed/
 logs/
-outputs/*
-!outputs/*.png
+
+# Outputs - ignore everything except PNG files
+outputs/
+!outputs/
+!outputs/**/
+!outputs/**/*.png
+
 wandb/
 mlruns/
 
