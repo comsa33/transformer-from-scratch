@@ -1,0 +1,41 @@
+2025-07-28 11:33:56,111 - training.trainer - INFO - ***** Running training *****
+2025-07-28 11:33:56,111 - training.trainer - INFO -   Num examples = 200
+2025-07-28 11:33:56,111 - training.trainer - INFO -   Num Epochs = 3
+2025-07-28 11:33:56,111 - training.trainer - INFO -   Instantaneous batch size per device = 16
+2025-07-28 11:33:56,111 - training.trainer - INFO -   Total train batch size = 16
+2025-07-28 11:33:56,111 - training.trainer - INFO -   Gradient Accumulation steps = 1
+2025-07-28 11:33:56,111 - training.trainer - INFO -   Total optimization steps = 39
+2025-07-28 11:34:29,149 - training.trainer - INFO - ***** Running training *****
+2025-07-28 11:34:29,149 - training.trainer - INFO -   Num examples = 200
+2025-07-28 11:34:29,149 - training.trainer - INFO -   Num Epochs = 3
+2025-07-28 11:34:29,149 - training.trainer - INFO -   Instantaneous batch size per device = 16
+2025-07-28 11:34:29,149 - training.trainer - INFO -   Total train batch size = 16
+2025-07-28 11:34:29,149 - training.trainer - INFO -   Gradient Accumulation steps = 1
+2025-07-28 11:34:29,149 - training.trainer - INFO -   Total optimization steps = 39
+2025-07-28 11:34:30,086 - training.trainer - INFO - Step 10 - Loss: 7.0268, LR: 0.000500
+2025-07-28 11:34:30,533 - training.trainer - INFO - Step 20 - Loss: 6.9325, LR: 0.001000
+2025-07-28 11:34:30,980 - training.trainer - INFO - Step 30 - Loss: 6.8659, LR: 0.000459
+2025-07-28 11:35:23,734 - training.trainer - INFO - ***** Running training *****
+2025-07-28 11:35:23,734 - training.trainer - INFO -   Num examples = 200
+2025-07-28 11:35:23,734 - training.trainer - INFO -   Num Epochs = 3
+2025-07-28 11:35:23,734 - training.trainer - INFO -   Instantaneous batch size per device = 16
+2025-07-28 11:35:23,734 - training.trainer - INFO -   Total train batch size = 16
+2025-07-28 11:35:23,734 - training.trainer - INFO -   Gradient Accumulation steps = 1
+2025-07-28 11:35:23,734 - training.trainer - INFO -   Total optimization steps = 39
+2025-07-28 11:35:24,669 - training.trainer - INFO - Step 10 - Loss: 7.0266, LR: 0.000500
+2025-07-28 11:35:25,033 - training.trainer - INFO - Step 20 - Loss: 6.9411, LR: 0.001000
+2025-07-28 11:35:25,441 - training.trainer - INFO - Step 30 - Loss: 6.8659, LR: 0.000459
+2025-07-28 11:36:13,315 - training.trainer - INFO - ***** Running training *****
+2025-07-28 11:36:13,316 - training.trainer - INFO -   Num examples = 200
+2025-07-28 11:36:13,316 - training.trainer - INFO -   Num Epochs = 2
+2025-07-28 11:36:13,316 - training.trainer - INFO -   Instantaneous batch size per device = 16
+2025-07-28 11:36:13,316 - training.trainer - INFO -   Total train batch size = 16
+2025-07-28 11:36:13,316 - training.trainer - INFO -   Gradient Accumulation steps = 1
+2025-07-28 11:36:13,316 - training.trainer - INFO -   Total optimization steps = 26
+2025-07-28 11:36:14,076 - training.trainer - INFO - Step 5 - Loss: 7.0130, LR: 0.000500
+2025-07-28 11:36:14,195 - training.trainer - INFO - Step 10 - Loss: 7.0047, LR: 0.001000
+2025-07-28 11:36:14,470 - training.trainer - INFO - Step 15 - Loss: 6.9493, LR: 0.000778
+2025-07-28 11:36:14,612 - training.trainer - INFO - Evaluation results: {'eval_loss': 6.999393701553345}
+2025-07-28 11:36:14,699 - training.trainer - INFO - Step 20 - Loss: 6.8736, LR: 0.000309
+2025-07-28 11:36:14,749 - training.trainer - INFO - Checkpoint saved at ./test_checkpoints/checkpoint-20
+2025-07-28 11:36:14,871 - training.trainer - INFO - Step 25 - Loss: 6.8828, LR: 0.000010
