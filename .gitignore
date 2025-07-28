@@ -39,7 +39,7 @@ logs/
 
 # Outputs - ignore everything except PNG files
 outputs/
-!outputs/
+# !outputs/
 !outputs/**/
 !outputs/**/*.png
 

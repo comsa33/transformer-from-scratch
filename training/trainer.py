@@ -13,7 +13,7 @@ from typing import Any
 import numpy as np
 import torch
 import torch.nn as nn
-from torch.cuda.amp import GradScaler, autocast
+from torch.amp import GradScaler, autocast
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
@@ -182,7 +182,7 @@ class Trainer:
         self.model.to(self.device)
 
         # Mixed precision 설정
-        self.scaler = GradScaler() if args.fp16 else None
+        self.scaler = GradScaler("cuda") if args.fp16 else None
 
         # Loss function
         self.loss_fn = None
@@ -317,7 +317,7 @@ class Trainer:
         model.train()
 
         if self.args.fp16:
-            with autocast():
+            with autocast("cuda"):
                 loss = self.compute_loss(model, inputs)
         else:
             loss = self.compute_loss(model, inputs)
@@ -469,7 +469,7 @@ class Trainer:
                 inputs = self._prepare_inputs(inputs)
 
                 if self.args.fp16:
-                    with autocast():
+                    with autocast("cuda"):
                         loss = self.compute_loss(self.model, inputs)
                 else:
                     loss = self.compute_loss(self.model, inputs)

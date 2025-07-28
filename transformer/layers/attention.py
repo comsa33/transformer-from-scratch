@@ -54,7 +54,9 @@ def scaled_dot_product_attention(
     # 마스크 적용 (있는 경우)
     if mask is not None:
         # 마스크가 1인 위치에 매우 작은 값을 더함
-        scores = scores.masked_fill(mask == 1, -1e9)
+        # FP16 호환을 위해 -1e4 사용 (FP16 최대값은 약 65504)
+        mask_value = -1e4 if scores.dtype == torch.float16 else -1e9
+        scores = scores.masked_fill(mask == 1, mask_value)
 
     # Softmax를 통해 attention weights 계산
     attention_weights = F.softmax(scores, dim=-1)
