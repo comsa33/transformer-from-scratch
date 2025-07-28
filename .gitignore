@@ -12,7 +12,7 @@ venv/
 *.pt
 *.pth
 *.pkl
-checkpoint/
+checkpoints/
 runs/
 
 # Jupyter
@@ -30,6 +30,9 @@ runs/
 Thumbs.db
 
 # Project specific
+data/cache/
+data/wmt14/
+data/wmt14_debug/
 data/raw/
 data/processed/
 logs/

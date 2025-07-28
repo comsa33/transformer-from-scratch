@@ -230,13 +230,13 @@ uv run pre-commit run --all-files
 ### 학습 실행
 ```bash
 # 기본 설정으로 학습
-uv run python scripts/train_with_config.py
+uv run scripts/train_with_config.py
 
 # 특정 설정 파일 사용
-uv run python scripts/train_with_config.py --config small
+uv run scripts/train_with_config.py --config small
 
 # 설정 파일 + 명령줄 옵션
-uv run python scripts/train_with_config.py --config base --batch-size 64 --learning-rate 0.0005
+uv run scripts/train_with_config.py --config base --batch-size 64 --learning-rate 0.0005
 ```
 
 ### 테스트 실행
@@ -245,14 +245,71 @@ uv run python scripts/train_with_config.py --config base --batch-size 64 --learn
 # (test-modeling 디렉토리에서)
 
 # 각 모듈별 테스트 실행
-uv run python tests/test_positional_encoding.py
-uv run python tests/test_token_embedding.py
-uv run python tests/test_attention.py
-uv run python tests/test_transformer.py
+uv run tests/test_positional_encoding.py
+uv run tests/test_token_embedding.py
+uv run tests/test_attention.py
+uv run tests/test_transformer.py
 # ... 기타 테스트 파일들
 
 # 결과는 outputs/ 디렉토리에 저장됩니다
 ```
+
+## WMT14 번역 모델 학습 (RTX 3090)
+
+### 1. 데이터 준비
+
+```bash
+# 필요한 라이브러리 설치
+uv add datasets sentencepiece
+
+# WMT14 데이터 다운로드 및 전처리
+uv run scripts/prepare_wmt14_data.py --config configs/rtx3090.yaml
+
+# 디버그용 작은 데이터셋 준비
+uv run scripts/prepare_wmt14_data.py --config configs/rtx3090_debug.yaml
+```
+
+### 2. 학습 실행
+
+```bash
+# RTX 3090에 최적화된 설정으로 학습
+uv run train_wmt14.py --config configs/rtx3090.yaml
+
+# 디버그 모드로 빠른 테스트
+uv run train_wmt14.py --debug
+
+# 체크포인트에서 재개
+uv run train_wmt14.py --config configs/rtx3090.yaml --resume checkpoints/rtx3090/checkpoint-1000
+```
+
+### 3. RTX 3090 최적화 설정
+
+**configs/rtx3090.yaml** 주요 설정:
+- **배치 크기**: 12 (문장 단위)
+- **Gradient Accumulation**: 20 steps (효과적 배치: 240)
+- **Mixed Precision (FP16)**: 활성화로 메모리 절약
+- **시퀀스 길이 제한**: 100 토큰
+- **데이터 서브셋**: 100,000 문장 (전체 4.5M 중)
+
+### 4. 모니터링
+
+학습 중 다음 정보가 표시됩니다:
+- 손실값 (Loss)
+- 학습률 (Learning Rate)
+- GPU 메모리 사용량
+- 처리 속도 (samples/sec)
+
+TensorBoard로 상세 모니터링:
+```bash
+tensorboard --logdir logs/rtx3090
+```
+
+### 5. 예상 학습 시간
+
+RTX 3090 기준:
+- **디버그 모드**: 약 10-30분
+- **100K 서브셋**: 약 12-24시간
+- **전체 데이터셋**: 현실적으로 불가능 (메모리 제한)
 
 ## 참고 문헌
 - Vaswani et al., ["Attention Is All You Need"](https://arxiv.org/abs/1706.03762), 2017

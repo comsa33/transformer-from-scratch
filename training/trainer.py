@@ -420,6 +420,17 @@ class Trainer:
 
             self._call_callback("on_epoch_end")
 
+            # 에폭 종료 시 평가 손실도 기록
+            if hasattr(self.state, "log_history") and self.state.log_history:
+                epoch_eval_losses = [
+                    log
+                    for log in self.state.log_history
+                    if log.get("epoch") == epoch and "eval_loss" in log
+                ]
+                if epoch_eval_losses:
+                    last_eval = epoch_eval_losses[-1]
+                    self._call_callback("on_log", logs=last_eval)
+
         self._call_callback("on_train_end")
 
         # 최고 성능 모델 로드
@@ -543,6 +554,9 @@ class Trainer:
         self.state.log_history.append(log_info)
         self.logger.info(f"Step {self.state.global_step} - Loss: {avg_loss:.4f}, LR: {lr:.6f}")
 
+        # 콜백에 로그 이벤트 전달
+        self._call_callback("on_log", logs=log_info)
+
     def _save_checkpoint(self):
         """체크포인트 저장"""
         checkpoint_path = self._get_checkpoint_path()
@@ -562,6 +576,9 @@ class Trainer:
         self.args.save_to_json(os.path.join(checkpoint_path, "training_args.json"))
 
         self.logger.info(f"Checkpoint saved at {checkpoint_path}")
+
+        # 콜백에 저장 이벤트 전달
+        self._call_callback("on_save")
 
         # 오래된 체크포인트 삭제
         self._rotate_checkpoints()
@@ -628,8 +645,8 @@ class Trainer:
         else:
             return current < best
 
-    def _call_callback(self, event: str):
+    def _call_callback(self, event: str, **kwargs):
         """콜백 호출"""
         for callback in self.callbacks:
             if hasattr(callback, event):
-                getattr(callback, event)(self, self.state, self.model)
+                getattr(callback, event)(self, self.state, self.model, **kwargs)

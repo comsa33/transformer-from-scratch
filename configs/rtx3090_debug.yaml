@@ -1,0 +1,60 @@
+# RTX 3090 디버그/테스트용 설정
+# 빠른 테스트를 위한 최소 설정
+
+model:
+  d_model: 512
+  num_heads: 8
+  num_encoder_layers: 2  # 축소
+  num_decoder_layers: 2  # 축소
+  d_ff: 2048
+  dropout: 0.1
+  max_sequence_length: 50  # 더 짧게
+  vocab_size: 10000  # 더 작은 vocab
+
+training:
+  batch_size: 32
+  gradient_accumulation_steps: 1
+
+  optimizer: "adam"
+  learning_rate: 0.001
+  betas: [0.9, 0.98]
+  eps: 0.000000001  # 1e-9
+
+  warmup_steps: 500
+  label_smoothing: 0.1
+
+  max_epochs: 3
+  gradient_clip_val: 1.0
+
+  save_every_n_steps: 100
+  validate_every_n_steps: 50
+
+  use_fp16: false  # 디버그 모드에서는 비활성화
+
+data:
+  dataset: "wmt14_en_de_subset"
+  train_size: 5000  # 매우 작은 서브셋
+  val_size: 500
+  test_size: 500
+
+  tokenizer_type: "bpe"
+  vocab_size: 10000
+
+  num_workers: 2
+  max_length: 50
+
+  # 추가 데이터 로더 설정
+  prefetch_factor: 2
+  persistent_workers: true
+  pin_memory: true
+  use_dynamic_batching: true
+
+logging:
+  log_every_n_steps: 10
+  tensorboard: true
+
+paths:
+  data_dir: "data/wmt14_debug"
+  checkpoint_dir: "checkpoints/debug"
+  log_dir: "logs/debug"
+  cache_dir: "data/cache"

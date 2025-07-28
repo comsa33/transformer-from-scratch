@@ -1,0 +1,77 @@
+# RTX 3090 (24GB VRAM) 학습 설정
+# WMT 2014 En-De 서브셋 학습용
+
+model:
+  # 기본 Transformer 설정 유지
+  d_model: 512
+  num_heads: 8
+  num_encoder_layers: 6
+  num_decoder_layers: 6
+  d_ff: 2048
+  dropout: 0.1
+  max_sequence_length: 100  # 메모리 절약을 위해 축소 (원본: 제한없음)
+  vocab_size: 32000  # BPE 토큰 수
+
+training:
+  # 배치 설정 - RTX 3090 메모리에 맞춤
+  batch_size: 12  # 토큰 수가 아닌 문장 수 (원본: ~25000 토큰)
+  gradient_accumulation_steps: 20  # 효과적인 배치 크기: 12 * 20 = 240
+
+  # 옵티마이저 설정
+  optimizer: "adam"
+  learning_rate: 0.0007  # 작은 배치에 맞게 조정
+  betas: [0.9, 0.98]
+  eps: 0.000000001  # 1e-9
+
+  # 학습률 스케줄링 (원본 논문 방식)
+  warmup_steps: 4000
+  label_smoothing: 0.1
+
+  # 학습 설정
+  max_epochs: 20  # 데이터가 적으므로 더 많은 에폭
+  gradient_clip_val: 1.0
+
+  # 체크포인트
+  save_every_n_steps: 1000
+  validate_every_n_steps: 500
+
+  # Mixed Precision (메모리 절약)
+  use_fp16: true
+
+  # 조기 종료
+  early_stopping_patience: 5
+  early_stopping_metric: "val_loss"
+
+data:
+  # WMT 2014 En-De 서브셋
+  dataset: "wmt14_en_de_subset"
+  train_size: 100000  # 전체 4.5M 중 일부만 사용
+  val_size: 3000
+  test_size: 3000
+
+  # 토크나이저 설정
+  tokenizer_type: "bpe"
+  vocab_size: 32000
+
+  # 데이터 로더 설정
+  num_workers: 4
+  prefetch_factor: 2
+  persistent_workers: true
+  pin_memory: true
+
+  # 시퀀스 길이 제한
+  max_length: 100
+
+  # 동적 배치 (비슷한 길이끼리 묶어 효율성 증가)
+  use_dynamic_batching: true
+
+logging:
+  log_every_n_steps: 100
+  tensorboard: true
+  wandb: false  # 선택사항
+
+paths:
+  data_dir: "data/wmt14"
+  checkpoint_dir: "checkpoints/rtx3090"
+  log_dir: "logs/rtx3090"
+  cache_dir: "data/cache"
