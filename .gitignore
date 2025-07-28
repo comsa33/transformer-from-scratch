@@ -33,7 +33,8 @@ Thumbs.db
 data/raw/
 data/processed/
 logs/
-outputs/
+outputs/*
+!outputs/*.png
 wandb/
 mlruns/
 
