@@ -9,7 +9,8 @@ model:
   num_decoder_layers: 6
   d_ff: 2048
   dropout: 0.1
-  max_sequence_length: 100  # 메모리 절약을 위해 축소 (원본: 제한없음)
+  activation: "gelu"  # 최신 연구에서 더 좋은 성능 (원논문: relu)
+  max_sequence_length: 256  # 메모리 절약을 위해 축소 (원본: 제한없음)
   vocab_size: 32000  # BPE 토큰 수
 
 training:
@@ -60,7 +61,7 @@ data:
   pin_memory: true
 
   # 시퀀스 길이 제한
-  max_length: 100
+  max_length: 256  # model.max_sequence_length와 동일하게 설정
 
   # 동적 배치 (비슷한 길이끼리 묶어 효율성 증가)
   use_dynamic_batching: true

@@ -39,7 +39,8 @@ logs/
 
 # Outputs - ignore everything except PNG files
 outputs/
-# !outputs/
+outputs/**/*.json
+!outputs/
 !outputs/**/
 !outputs/**/*.png
 

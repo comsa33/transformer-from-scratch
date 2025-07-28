@@ -41,6 +41,7 @@ def create_model(config: dict, vocab_size: int, device: torch.device) -> Transfo
         d_ff=model_config["d_ff"],
         max_length=model_config["max_sequence_length"],
         dropout=model_config["dropout"],
+        activation=model_config.get("activation", "relu"),  # 기본값은 relu
     )
 
     # 파라미터 수 계산

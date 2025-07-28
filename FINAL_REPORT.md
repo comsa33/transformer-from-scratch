@@ -324,34 +324,34 @@
 
 ## WMT14 번역 모델 학습 결과
 
-**학습 상태**: 완료
-**마지막 업데이트**: 2025-07-28 15:56:42
+**학습 상태**: 진행 중
+**마지막 업데이트**: 2025-07-28 17:28:08
 
 ### 학습 설정
-- **배치 크기**: 32
-- **학습률**: 0.001
-- **에폭 수**: 3
-- **Mixed Precision**: 비활성화
+- **배치 크기**: 12
+- **학습률**: 0.0007
+- **에폭 수**: 20
+- **Mixed Precision**: 활성화
 
 ### 학습 진행 상황
-- **현재 스텝**: 360
+- **현재 스텝**: 1000
 - **현재 에폭**: 2
-- **최근 학습 손실**: 6.9143
-- **최소 학습 손실**: 6.8926
-- **최근 검증 손실**: 7.5176
-- **최소 검증 손실**: 7.5176
-- **경과 시간**: 0:00:20
+- **최근 학습 손실**: 6.9826
+- **최소 학습 손실**: 6.9826
+- **최근 검증 손실**: 8.1319
+- **최소 검증 손실**: 8.1319
+- **경과 시간**: 0:25:24
 
 ### 학습 곡선
 
 #### 손실 변화
-![Loss Curves](outputs/training/debug_20250728_155621/loss_curves.png)
+![Loss Curves](outputs/training/rtx3090_20250728_170243/loss_curves.png)
 
 #### 학습률 변화
-![Learning Rate](outputs/training/debug_20250728_155621/learning_rate.png)
+![Learning Rate](outputs/training/rtx3090_20250728_170243/learning_rate.png)
 
 #### 종합 대시보드
-![Training Dashboard](outputs/training/debug_20250728_155621/training_dashboard.png)
+![Training Dashboard](outputs/training/rtx3090_20250728_170243/training_dashboard.png)
 
 ### 체크포인트
-체크포인트는 `checkpoints/debug`에 저장됩니다.
+체크포인트는 `checkpoints/rtx3090`에 저장됩니다.
